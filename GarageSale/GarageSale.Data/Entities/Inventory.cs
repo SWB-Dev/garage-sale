@@ -10,5 +10,18 @@ namespace GarageSale.Data.Entities
 	{
 		public Item Item { get; set; }
 		public int Quantity { get; set; }
+		public decimal UnitPrice { get; set; }
+
+		public Inventory()
+		{
+
+		}
+
+		public Inventory(Item item, int quantity, decimal unitPrice)
+		{
+			Item = item;
+			Quantity = quantity;
+			UnitPrice = unitPrice;
+		}
 	}
 }

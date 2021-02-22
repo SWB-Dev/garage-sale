@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageSale.Site", "GarageSa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageSale.Data", "GarageSale.Data\GarageSale.Data.csproj", "{C894EC7D-533B-4514-B539-3AA585CA725F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{56E64675-6253-4B20-B6BB-A104E20BDC63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C894EC7D-533B-4514-B539-3AA585CA725F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C894EC7D-533B-4514-B539-3AA585CA725F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C894EC7D-533B-4514-B539-3AA585CA725F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E64675-6253-4B20-B6BB-A104E20BDC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E64675-6253-4B20-B6BB-A104E20BDC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E64675-6253-4B20-B6BB-A104E20BDC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E64675-6253-4B20-B6BB-A104E20BDC63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

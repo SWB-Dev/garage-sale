@@ -10,5 +10,16 @@ namespace GarageSale.Data.Entities
 	{
 		public OrderItemDetail ItemDetails { get; set; }
 		public decimal Price { get; set; }
+
+		public OrderItem()
+		{
+
+		}
+
+		public OrderItem(OrderItemDetail itemDetails, decimal price)
+		{
+			ItemDetails = itemDetails;
+			Price = price;
+		}
 	}
 }

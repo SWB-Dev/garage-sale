@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace GarageSale.Data
 
 		public async Task<Inventory> AddAsync(Inventory entity, CancellationToken cancellationToken = default)
 		{
+			var itemId = new object[] { entity.Item.Id };
+			var item = await _dbContext.Items.FindAsync(itemId, cancellationToken);
+
+			entity.Item = item;
 			await _dbContext.Inventory.AddAsync(entity, cancellationToken);
 			await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -44,6 +49,16 @@ namespace GarageSale.Data
 			var keys = new object[] { id };
 			return await _dbContext.Inventory.FindAsync(keys, cancellationToken);
 
+		}
+
+		public async Task<Inventory> GetByItemIdAsync(int itemId, CancellationToken cancellation)
+		{
+			return await _dbContext.Inventory.FirstOrDefaultAsync(i => i.Item.Id == itemId, cancellation);
+		}
+
+		public async Task<Inventory> GetFilteredSingleAsync(Expression<Func<Inventory, bool>> filter, CancellationToken cancellationToken = default)
+		{
+			return await _dbContext.Inventory.FirstOrDefaultAsync(filter, cancellationToken);
 		}
 
 		public async Task UpdateAsync(Inventory entity, CancellationToken cancellationToken = default)

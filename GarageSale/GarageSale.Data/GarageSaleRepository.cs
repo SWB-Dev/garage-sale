@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,6 +41,11 @@ namespace GarageSale.Data
 		{
 			var keys = new object[] { id };
 			return await _dbContext.Set<T>().FindAsync(keys, cancellationToken);
+		}
+
+		public async Task<T> GetFilteredSingleAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
+		{
+			return await _dbContext.Set<T>().FirstOrDefaultAsync(filter, cancellationToken);
 		}
 
 		public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)

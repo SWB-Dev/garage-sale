@@ -18,7 +18,46 @@ namespace GarageSale.API.ItemEndpoints
 
 		[HttpGet]
 		[Route("/api/item/filtered/")]
-		public async Task<ActionResult<List<ItemDto>>> GetFilteredAsync([FromQuery]ItemFilterCriteria criteria, CancellationToken cancellationToken)
+		// api/item/filtered?criteria[0].Field=Description&criteria[0].Operation=Contains&criteria[0].Value=er&criteria[1].Field=Name&criteria[1].Operation=Contains&criteria[1].Value=str
+		public async Task<ActionResult<List<ItemDto>>> GetFilteredAsync([FromQuery]List<ItemFilterCriteria> criteria, CancellationToken cancellationToken)
+		{
+			//Expression<Func<Item, bool>> filter = i => i.IsForSale;
+			List<Expression<Func<Item, bool>>> filters = new List<Expression<Func<Item, bool>>>();
+
+			foreach (var c in criteria)
+			{
+				var filterCriteria = new FilterCritiera<Item>(c.Field, c.Value);
+				filters.Add(filterCriteria.Filter(c.Operation));
+			}
+			//var filterCriteria = new FilterCritiera<Item>(criteria.Field, criteria.Value);
+			//var filter = filterCriteria.Filter(criteria.Operation);
+
+			List<Item> items = new List<Item>();
+
+			foreach (var f in filters)
+			{
+				var item = await _repo.GetFilteredSingleAsync(f, cancellationToken);
+				if (item is not null)
+				{
+					items.Add(item);
+				}
+			}
+
+			//filters.ForEach(async f => { 
+			//	var item = await _repo.GetFilteredSingleAsync(f, cancellationToken);
+			//	if (item is not null)
+			//		items.Add(item);
+			//});
+
+			//var item = await _repo.GetFilteredSingleAsync(filter, cancellationToken);
+			if (!items.Any())
+				return NotFound();
+			return items.Select(i => i.MapDto()).ToList(); 
+		}
+
+		[HttpGet]
+		[Route("/api/item/filtered/single/")]
+		public async Task<ActionResult<List<ItemDto>>> GetFilteredAsync([FromQuery] ItemFilterCriteria criteria, CancellationToken cancellationToken)
 		{
 			//Expression<Func<Item, bool>> filter = i => i.IsForSale;
 

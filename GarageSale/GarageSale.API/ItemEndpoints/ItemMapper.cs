@@ -35,5 +35,18 @@ namespace GarageSale.API.ItemEndpoints
 
 			return item;
 		}
+
+		public static void UpdateItem(this Item item,ItemDto dto)
+		{
+			foreach (var prop in item.GetType().GetProperties().Where(p => p.Name != "Id"))
+			{
+				var itemProp = item.GetType().GetProperty(prop.Name);
+				var dtoProp = dto.GetType().GetProperty(prop.Name);
+
+				var newValue = dtoProp.GetValue(dto);
+
+				itemProp.SetValue(item, newValue);
+			}
+		}
 	}
 }

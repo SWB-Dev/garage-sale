@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GarageSale.Data\GarageSale.Data.csproj" />
+    <ProjectReference Include="..\GarageSale.Shared\GarageSale.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

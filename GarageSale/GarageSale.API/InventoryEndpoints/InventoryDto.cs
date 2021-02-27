@@ -1,4 +1,5 @@
 ﻿using GarageSale.API.ItemEndpoints;
+using GarageSale.Shared.ItemDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

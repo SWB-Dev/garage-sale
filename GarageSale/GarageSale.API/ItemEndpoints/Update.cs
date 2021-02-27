@@ -1,5 +1,6 @@
 ﻿using GarageSale.Data;
 using GarageSale.Data.Entities;
+using GarageSale.Shared.ItemDtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

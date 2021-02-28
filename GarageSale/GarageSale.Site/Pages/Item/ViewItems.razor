@@ -9,18 +9,20 @@ else
 {
 <table>
 	<tr>
-		<td>Id</td>
 		<td>Name</td>
 		<td>Description</td>
 		<td>Is For Sale</td>
+		<td>Edit</td>
 	</tr>
 	@foreach (var item in items)
 	{
 		<tr>
-			<td>@item.Id</td>
 			<td>@item.Name</td>
 			<td>@item.Description</td>
 			<td>@item.IsForSale</td>
+			<td>
+				<a href="/garage-sale/items/@item.Id/edit">Edit</a>
+			</td>
 		</tr>
 	}
 </table>

@@ -15,6 +15,7 @@ namespace GarageSale.Shared.Services
 		public HttpClient Client { get; }
 		private const string MEDIATYPE = "application/json";
 		public bool IsFetchingData { get; set; } = false;
+		public string Message { get; set; }
 
 		public GarageSaleItemService(HttpClient client)
 		{
@@ -49,15 +50,44 @@ namespace GarageSale.Shared.Services
 
 		public async Task<ItemDto> GetByIdAsync(int id)
 		{
-			var dto = await Client.GetAsync($"get/{id}")
-				.Result.Content.ReadFromJsonAsync<ItemDto>();
-
+			IsFetchingData = true;
+			ItemDto dto = null;
+			var response = await Client.GetAsync($"get/{id}");
+			if (response.IsSuccessStatusCode)
+			{
+				dto = await response.Content.ReadFromJsonAsync<ItemDto>();
+			}
+			IsFetchingData = false;
 			return dto;
 		}
 
 		public async Task<ItemDto> UpdateAsync(ItemDto entity)
 		{
-			throw new NotImplementedException();
+			BeginDataFetch();
+			var message = "Update failed!";
+			ItemDto dto = null;
+			string json = JsonSerializer.Serialize<ItemDto>(entity);
+			var content = new StringContent(json, Encoding.UTF8, MEDIATYPE);
+			var response = await Client.PatchAsync("update", content);
+			if (response.IsSuccessStatusCode)
+			{
+				dto = await response.Content.ReadFromJsonAsync<ItemDto>();
+				message = "Update successful!";
+			}
+			EndDataFetch(message);
+			return dto;
+		}
+
+		private void BeginDataFetch()
+		{
+			IsFetchingData = true;
+			Message = String.Empty;
+		}
+
+		private void EndDataFetch(string message = "")
+		{
+			IsFetchingData = false;
+			Message = message;
 		}
 	}
 }

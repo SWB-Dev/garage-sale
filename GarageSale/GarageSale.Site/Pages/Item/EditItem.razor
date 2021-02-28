@@ -1,0 +1,34 @@
+﻿@page "/garage-sale/items/{id:int}/edit" 
+
+<h3>EditItem @Service.Message</h3>
+
+@if (Service.IsFetchingData)
+{
+	<p>Loading...</p>
+}
+else if (dto is null)
+{
+	<p>Requested item not found!.</p>
+}
+else
+{
+<EditForm Model="@dto" OnValidSubmit="@HandleValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<div>
+		<label for="name">Name</label>
+		<InputText id="name" @bind-Value="@dto.Name" />
+	</div>
+	<div>
+		<label for="description">Description</label>
+		<InputText id="description" @bind-Value="@dto.Description" />
+	</div>
+	<div>
+		<label for="isForSale">For Sale</label>
+		<InputCheckbox id="isForSale" @bind-Value="@dto.IsForSale" />
+	</div>
+
+	<button type="submit">Submit</button>
+</EditForm>
+}
+

@@ -1,0 +1,27 @@
+﻿@page "/garage-sale/items"
+<h3>Garage Sale Items</h3>
+
+@if (Service.IsFetchingData)
+{
+	<p>Loading...</p>
+}
+else
+{
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Name</td>
+		<td>Description</td>
+		<td>Is For Sale</td>
+	</tr>
+	@foreach (var item in items)
+	{
+		<tr>
+			<td>@item.Id</td>
+			<td>@item.Name</td>
+			<td>@item.Description</td>
+			<td>@item.IsForSale</td>
+		</tr>
+	}
+</table>
+}

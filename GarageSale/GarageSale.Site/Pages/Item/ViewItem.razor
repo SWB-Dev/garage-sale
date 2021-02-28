@@ -1,0 +1,15 @@
+﻿@page "/garage-sale/items/{id:int}"
+@inherits GarageSaleComponentBase<ItemDto>
+
+<h3>@Dto?.Name</h3>
+@if (Service.IsFetchingData)
+{
+	<p>Loading...</p>
+}
+else
+{
+	<p>@Dto.Description</p>
+	<p>@Dto.IsForSale</p>
+	<a href="/garage-sale/items/@Id/edit">Edit</a>
+}
+

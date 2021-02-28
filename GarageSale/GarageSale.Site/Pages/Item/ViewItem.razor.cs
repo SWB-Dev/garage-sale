@@ -8,20 +8,14 @@ using System.Threading.Tasks;
 
 namespace GarageSale.Site.Pages.Item
 {
-	public partial class EditItem
+	public partial class ViewItem
 	{
 		[Parameter]
 		public int Id { get; set; }
 
-		protected async override Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			Dto = await Service.GetByIdAsync(Id);
-		}
-
-		private async void HandleValidSubmit()
-		{
-			Dto = await Service.UpdateAsync(Dto);
-			StateHasChanged();
 		}
 	}
 }

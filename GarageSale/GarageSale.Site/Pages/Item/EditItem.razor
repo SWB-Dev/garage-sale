@@ -1,4 +1,5 @@
-﻿@page "/garage-sale/items/{id:int}/edit" 
+﻿@page "/garage-sale/items/{id:int}/edit"
+@inherits GarageSaleComponentBase<ItemDto>
 
 <h3>EditItem @Service.Message</h3>
 
@@ -6,29 +7,29 @@
 {
 	<p>Loading...</p>
 }
-else if (dto is null)
+else if (Dto is null)
 {
 	<p>Requested item not found!.</p>
 }
 else
 {
-<EditForm Model="@dto" OnValidSubmit="@HandleValidSubmit">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
-	<div>
-		<label for="name">Name</label>
-		<InputText id="name" @bind-Value="@dto.Name" />
-	</div>
-	<div>
-		<label for="description">Description</label>
-		<InputText id="description" @bind-Value="@dto.Description" />
-	</div>
-	<div>
-		<label for="isForSale">For Sale</label>
-		<InputCheckbox id="isForSale" @bind-Value="@dto.IsForSale" />
-	</div>
+	<EditForm Model="@Dto" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div>
+			<label for="name">Name</label>
+			<InputText id="name" @bind-Value="@Dto.Name" />
+		</div>
+		<div>
+			<label for="description">Description</label>
+			<InputText id="description" @bind-Value="@Dto.Description" />
+		</div>
+		<div>
+			<label for="isForSale">For Sale</label>
+			<InputCheckbox id="isForSale" @bind-Value="@Dto.IsForSale" />
+		</div>
 
-	<button type="submit">Submit</button>
-</EditForm>
+		<button type="submit">Submit</button>
+	</EditForm>
 }
 

@@ -1,5 +1,6 @@
 ﻿using GarageSale.Shared.ItemDtos;
 using GarageSale.Shared.Services;
+using GarageSale.Site.Common;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,6 @@ namespace GarageSale.Site.Pages.Item
 {
 	public partial class ViewItems
 	{
-		[Inject]
-		private GarageSaleItemService Service { get; set; }
 		public IEnumerable<ItemDto> items;
 
 

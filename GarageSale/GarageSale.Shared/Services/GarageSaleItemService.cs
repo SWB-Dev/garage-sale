@@ -15,7 +15,7 @@ namespace GarageSale.Shared.Services
 		public HttpClient Client { get; }
 		private const string MEDIATYPE = "application/json";
 		public bool IsFetchingData { get; set; } = false;
-		public string Message { get; set; }
+		public string Message { get; set; } = String.Empty;
 
 		public GarageSaleItemService(HttpClient client)
 		{
@@ -50,14 +50,14 @@ namespace GarageSale.Shared.Services
 
 		public async Task<ItemDto> GetByIdAsync(int id)
 		{
-			IsFetchingData = true;
+			BeginDataFetch();
 			ItemDto dto = null;
 			var response = await Client.GetAsync($"get/{id}");
 			if (response.IsSuccessStatusCode)
 			{
 				dto = await response.Content.ReadFromJsonAsync<ItemDto>();
 			}
-			IsFetchingData = false;
+			EndDataFetch();
 			return dto;
 		}
 

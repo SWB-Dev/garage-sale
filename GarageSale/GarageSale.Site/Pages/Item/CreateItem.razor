@@ -1,0 +1,26 @@
+﻿@page "/garage-sale/items/create"
+@inherits GarageSaleComponentBase<ItemDto>
+
+<h3>CreateItem</h3>
+@if (Service.IsFetchingData)
+{
+	<p>Attempting to create new item...</p>
+}
+<p>@Service.Message</p>
+<EditForm Model="@Dto" OnValidSubmit="@HandleValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<div>
+		<label for="name">Name</label>
+		<InputText id="name" @bind-Value="@Dto.Name" />
+	</div>
+	<div>
+		<label for="description">Description</label>
+		<InputTextArea id="description" @bind-Value="@Dto.Description" />
+	</div>
+	<div>
+		<label for="isForSale">For Sale</label>
+		<InputCheckbox id="isForSale" @bind-Value="@Dto.IsForSale" />
+	</div>
+	<button type="submit">Submit</button>
+</EditForm>
